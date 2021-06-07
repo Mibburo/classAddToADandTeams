@@ -1,0 +1,10 @@
+{
+  "realm": "SSI-Taxis",
+  "auth-server-url": "https://dss1.aegean.gr/auth",
+  "ssl-required": "external",
+  "resource": "ssiTaxis",
+  "credentials": {
+    "secret": "a265fbdb-5dd5-4405-b457-5ae882052bff"
+  },
+  "confidential-port": 0
+}

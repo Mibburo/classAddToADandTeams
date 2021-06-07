@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="SemiColonWeb" />
+
+    <!-- Stylesheets
+    ============================================= -->
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <!--<link rel="stylesheet" href="../static/style.css" type="text/css" th:href="@{/css/style.css}"/>-->
+    <!--<link rel="stylesheet" href="css/dark.css" type="text/css" />-->
+    <link rel="stylesheet" href="../static/css/font-icons.css" type="text/css" th:href="@{/css/font-icons.css}" />
+    <link rel="stylesheet" href="../static/css/animate.css" type="text/css" th:href="@{/css/animate.css}"/>
+    <link rel="stylesheet" href="../static/css/magnific-popup.css" type="text/css" th:href="@{/css/magnific-popup.css}"/>
+
+    <link rel="stylesheet" href="../static/css/responsive.css" type="text/css" th:href="@{/css/responsive.css}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../static/css/colors.css" type="text/css" th:href="@{/css/colors.css}"/>
+    <link rel="stylesheet" href="../static/css/custom.css" type="text/css" th:href="@{/css/custom.css}"/>
+
+
+
+    <!-- Document Title
+    ============================================= -->
+    <title>Home | Smart Class Portal | University of the Aegean</title>
+
+</head>
+
+<body class="stretched">
+
+<!-- Document Wrapper
+============================================= -->
+<div id="wrapper" class="clearfix">
+
+    <div th:replace="header :: header">This is the header</div>
+
+    <!-- Page Title
+    ============================================= -->
+    <section id="page-title">
+
+        <div class="container clearfix">
+            <h1>Instructions</h1>
+
+        </div>
+
+    </section><!-- #page-title end -->
+
+    <!-- Content
+    ============================================= -->
+    <div class="container">
+        <form method="post" action="#" th:action="@{/addGuest}" th:object="${emailForm}" id="emailForm">
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="userEmail">Please provide your personal email</label>
+                    <input type="email" id="userEmail" class="form-control" th:field="*{email}" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            <div>
+                Instructions for logging in to TEAMS: test
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Click the link: <a href="https://teams.microsoft.com/l/team/19%3aAc94KrdWWIveviMqzG5ngZGvA11kzHtbF5JLVDUMjMU1%40thread.tacv2/conversations?groupId=cfbefafc-ec6e-45c5-9e81-9125995e43ca&tenantId=d4a81dbe-9310-4d28-b060-dc9cd82a3b8b">Go to TEAMS channel</a>
+                    </li>
+                    <li class="list-group-item">MS TEAMS up will start</li>
+                    <li class="list-group-item">Click Sign in Options</li>
+                    <li class="list-group-item">Click Sign in to an Organisation</li>
+                    <li class="list-group-item">At the prompt type:  i4mlabuaegean.onmicrosoft.com</li>
+                    <li class="list-group-item">At the email prompt add: go@dss1.aegean.gr</li>
+                </ul>
+<!--                <input type="submit"/>-->
+            </div>
+        </form>
+
+    </div>
+    <footer id="footer">
+
+        <div class="container">
+
+            <!-- Footer Widgets
+      ============================================= -->
+            <div th:replace="footer :: footer">&copy; 2016 The Static Templates</div>
+            <!-- .footer-widgets-wrap end -->
+
+        </div>
+
+        <!-- Copyrights
+        ============================================= -->
+        <!-- #copyrights end -->
+
+    </footer>
+
+    <!-- #footer end -->
+
+</div><!-- #wrapper end -->
+
+<!-- Go To Top
+============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div>
+
+<!-- External JavaScripts
+============================================= -->
+<script src="../js/jquery.js"></script>
+<script src="../js/plugins.js"></script>
+
+<!-- Footer Scripts
+============================================= -->
+<script src="../js/functions.js"></script>
+</div>
+
+</body>
+</html>

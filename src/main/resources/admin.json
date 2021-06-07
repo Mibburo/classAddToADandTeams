@@ -1,0 +1,10 @@
+{
+  "realm": "grnetEidas",
+  "auth-server-url": "https://dss1.aegean.gr/auth",
+  "ssl-required": "external",
+  "resource": "smartclass",
+  "credentials": {
+    "secret": "24ac3ae4-2c50-431d-8dde-283138975420"
+  },
+  "confidential-port": 0
+}

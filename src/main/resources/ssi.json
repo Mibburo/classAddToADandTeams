@@ -1,0 +1,10 @@
+{
+  "realm": "ssi_linking",
+  "auth-server-url": "https://dss1.aegean.gr/auth",
+  "ssl-required": "external",
+  "resource": "smartclass",
+  "credentials": {
+    "secret": "f7de9684-a7bb-4adc-9cfa-a71bf2b1791e"
+  },
+  "confidential-port": 0
+}

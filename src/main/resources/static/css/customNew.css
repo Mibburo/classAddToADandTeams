@@ -84,3 +84,16 @@ body{
     color:#473B6C;
 }
 
+@media only screen and (max-width: 900px) {
+    .row{
+        width: 100% !important;
+    }
+    .signup{
+        width: 100% !important;
+    }
+    .login{
+        width: 100% !important;
+    }
+
+}
+

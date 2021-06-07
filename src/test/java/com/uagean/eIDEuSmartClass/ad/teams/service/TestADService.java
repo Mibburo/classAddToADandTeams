@@ -30,12 +30,9 @@ public class TestADService {
         ActiveDirectoryService adserv = new ActiveDirectoryServiceImpl();
         //String accessToken = adserv.getAccessToken();
         String response = adserv.inviteGuestUser("testemailKB@email.com");
-        log.info("xxxxxxxxxxxxxxxxxxx response : {}", response);
         JSONObject jsonObject = (JSONObject) JSONValue.parse(response);
-        log.info("yyyyyyyyyyyyyyyyyy jsonObject : {}", jsonObject);
         Map<String, String> invitedUser = (HashMap<String, String>) jsonObject.get("invitedUser");
         String userId = invitedUser.get("id");
-        log.info("zzzzzzzzzzzzzzzzzzzzzz userId : {}", userId);
         System.out.println(adserv.addToTeamsRest(userId, "cfbefafc-ec6e-45c5-9e81-9125995e43ca"));
     }
 

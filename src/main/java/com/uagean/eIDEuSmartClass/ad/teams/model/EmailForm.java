@@ -12,4 +12,5 @@ import lombok.ToString;
 public class EmailForm {
 
     private String email;
+    private String emailSec;
 }

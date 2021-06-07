@@ -1,17 +1,5 @@
 package com.uagean.eIDEuSmartClass.ad.teams.controller;
 
-import com.azure.core.credential.TokenCredential;
-
-
-import com.azure.core.exception.ResourceNotFoundException;
-import com.google.gson.JsonPrimitive;
-import com.microsoft.graph.authentication.TokenCredentialAuthProvider;
-import com.microsoft.graph.models.AadUserConversationMember;
-import com.microsoft.graph.models.ConversationMember;
-
-import com.microsoft.graph.models.Invitation;
-import com.microsoft.graph.requests.ConversationMemberCollectionPage;
-import com.microsoft.graph.requests.GraphServiceClient;
 import com.uagean.eIDEuSmartClass.ad.teams.controller.validator.EmailValidator;
 import com.uagean.eIDEuSmartClass.ad.teams.model.*;
 import com.uagean.eIDEuSmartClass.ad.teams.service.ActiveDirectoryService;
@@ -25,8 +13,8 @@ import org.keycloak.representations.IDToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -34,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
 
@@ -53,7 +42,7 @@ public class LoginController {
     public final static String TOKEN_NAME = "access_token";
     public final static String TEAM_ID = "cfbefafc-ec6e-45c5-9e81-9125995e43ca"; //groupId
     // tenant-id = d4a81dbe-9310-4d28-b060-dc9cd82a3b8b
-    private static final String EMAIL_FORM = "emailForm";
+    private static final String EMAIL_FORM = "emailFormCmd";
 
     @InitBinder(EMAIL_FORM)
     protected void emailFormInitBinder(WebDataBinder binder) {
@@ -85,7 +74,7 @@ public class LoginController {
      */
 
     @RequestMapping(value = {"/eIDASSuccess", "/loginSuccess", "/ssi/registerEmail"})
-    public ModelAndView login(@CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
+    public ModelAndView login(@ModelAttribute (EMAIL_FORM) EmailForm emailForm, @CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
                         @CookieValue(value = "type", required = false) String typeCookie,
                         HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs) {
 
@@ -97,10 +86,13 @@ public class LoginController {
         return new ModelAndView("redirect:/error", model);
     }
 
-    @PostMapping("/addGuest")
-    public String testAddMember(@ModelAttribute (EMAIL_FORM) EmailForm emailForm, @CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
-                              @CookieValue(value = "type", required = false) String typeCookie,
-                              HttpServletRequest req, Principal principal, Model model, RedirectAttributes redirectAttrs){
+    @RequestMapping("/addGuest")
+    public ModelAndView testAddMember(@ModelAttribute (EMAIL_FORM) @Valid EmailForm emailForm, @CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
+                                @CookieValue(value = "type", required = false) String typeCookie, Errors errors,
+                                HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs){
+        if (errors.hasErrors()) {
+            return new ModelAndView("redirect:/ssi/registerEmail", model);
+        }
 
         if (principal != null) {
 
@@ -135,7 +127,7 @@ public class LoginController {
                 }
                 if(exists && user != null){
                     handleTeam(user.getId());
-                    return "redirect:/";
+                    return new ModelAndView("teamsRedirect");
                 }
                 String invitedUserResponse = adService.inviteGuestUser(idToken.getEmail());
                 JSONObject jsonObject = (JSONObject) JSONValue.parse(invitedUserResponse);
@@ -143,23 +135,21 @@ public class LoginController {
                 String userId = invitedUser.get("id");
                 adService.updateUserEmail(userId, emailForm.getEmail(), fuser.getEngName(), fuser.getEngSurname());
                 handleTeam(userId);
-                return "redirect:/";
+                return new ModelAndView("teamsRedirect");
             } catch (Exception e) {
                 log.error(e.getMessage());
 
             }
         }
         model.addAttribute("error", "could not add user to AD");
-        return "redirect:/error";
+        return new ModelAndView("redirect:/error", model);
     }
 
     private void handleTeam(String userId){
-
         String groupId = adService.getGroupByName("Introduction to e-Privacy and Cybersecurity: Technology and Policy issues");
         if(!adService.checkMemberExistence(groupId, userId)){
             adService.addToTeamsRest(userId, groupId);
         }
-
     }
 }
 

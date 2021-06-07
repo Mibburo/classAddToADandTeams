@@ -11,8 +11,11 @@
 	<groupId>com.uagean</groupId>
 	<artifactId>eIDEuSmartClass.ad.teams</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<name>eIDEuSmartClass.ad.teams</name>
 	<description>Register to active directory and teams</description>
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

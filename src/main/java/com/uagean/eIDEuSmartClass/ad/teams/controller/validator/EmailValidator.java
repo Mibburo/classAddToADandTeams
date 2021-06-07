@@ -1,12 +1,14 @@
 package com.uagean.eIDEuSmartClass.ad.teams.controller.validator;
 
 import com.uagean.eIDEuSmartClass.ad.teams.model.EmailForm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.util.regex.Pattern;
 
+@Slf4j
 @Component
 public class EmailValidator implements Validator {
 
@@ -24,12 +26,12 @@ public class EmailValidator implements Validator {
     public void validate(Object arg0, Errors errors) {
 
         EmailForm emailForm = (EmailForm) arg0;
-
-        if (!mailPattern.matcher(emailForm.getEmail()).matches()) {
+        log.info("aaaaaaaaaaaaaaaaaa validator");
+        if (null == emailForm.getEmail() || "".equals(emailForm.getEmail()) || !mailPattern.matcher(emailForm.getEmail()).matches()) {
+            log.info("cccccccccccccccccccccccccc validator 2");
             errors.rejectValue("email", INVALID_EMAIL);
         }
-
-        return;
+        log.info("ddddddddddddddddddd validator 3");
 
     }
 

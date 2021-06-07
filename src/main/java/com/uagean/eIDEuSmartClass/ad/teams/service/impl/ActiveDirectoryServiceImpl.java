@@ -1,5 +1,6 @@
 package com.uagean.eIDEuSmartClass.ad.teams.service.impl;
 
+import com.azure.core.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -148,33 +149,36 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
     }
 
     @Override
-    public Boolean checkAdExistence(String userId){
+    public ADUserResponse checkAdExistence(String userEmail){
 
         String accessToken = getAccessToken();
         try {
-            String encodedId = URLEncoder.encode(userId, StandardCharsets.UTF_8.toString());
+            String encodedId = URLEncoder.encode(userEmail, StandardCharsets.UTF_8.toString());
             String getMembersEP = "https://graph.microsoft.com/v1.0/users/"+encodedId;
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.set("Authorization", "Bearer "+accessToken);
             HttpEntity request = new HttpEntity(headers);
-            ResponseEntity<String> response = restTemplate.exchange( getMembersEP, HttpMethod.GET, request, String.class, 1);
+            ResponseEntity<String> response = restTemplate.exchange(getMembersEP, HttpMethod.GET, request, String.class, 1);
+            log.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ status code :{}", response.getStatusCode());
             ObjectMapper mapper = new ObjectMapper();
             try {
-                ADUserResponse users = mapper.readValue(response.getBody(), ADUserResponse.class);
+                ADUserResponse user = mapper.readValue(response.getBody(), ADUserResponse.class);
 
-                if(!users.getUserPrincipalName().isEmpty()){
-                    return true;
+                if (!user.getUserPrincipalName().isEmpty()) {
+                    return user;
                 }
+
             } catch (JsonProcessingException e) {
                 log.error(e.getMessage());
             }
+
         } catch (UnsupportedEncodingException e) {
             log.error(e.getMessage());
         }
 
-        return false;
+        return null;
     }
 
     @Override

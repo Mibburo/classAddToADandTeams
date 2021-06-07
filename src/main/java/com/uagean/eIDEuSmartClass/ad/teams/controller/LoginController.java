@@ -3,6 +3,7 @@ package com.uagean.eIDEuSmartClass.ad.teams.controller;
 import com.azure.core.credential.TokenCredential;
 
 
+import com.azure.core.exception.ResourceNotFoundException;
 import com.google.gson.JsonPrimitive;
 import com.microsoft.graph.authentication.TokenCredentialAuthProvider;
 import com.microsoft.graph.models.AadUserConversationMember;
@@ -12,10 +13,7 @@ import com.microsoft.graph.models.Invitation;
 import com.microsoft.graph.requests.ConversationMemberCollectionPage;
 import com.microsoft.graph.requests.GraphServiceClient;
 import com.uagean.eIDEuSmartClass.ad.teams.controller.validator.EmailValidator;
-import com.uagean.eIDEuSmartClass.ad.teams.model.EmailForm;
-import com.uagean.eIDEuSmartClass.ad.teams.model.FormUser;
-import com.uagean.eIDEuSmartClass.ad.teams.model.UserTest;
-import com.uagean.eIDEuSmartClass.ad.teams.model.UserWrappers;
+import com.uagean.eIDEuSmartClass.ad.teams.model.*;
 import com.uagean.eIDEuSmartClass.ad.teams.service.ActiveDirectoryService;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
@@ -23,6 +21,7 @@ import net.minidev.json.JSONValue;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.keycloak.representations.AccessToken;
+import org.keycloak.representations.IDToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -30,6 +29,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -88,43 +88,10 @@ public class LoginController {
     public ModelAndView login(@CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
                         @CookieValue(value = "type", required = false) String typeCookie,
                         HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs) {
-//        getKeycloakSecurityContext().getIdToken();
-
 
         if (principal != null) {
-
-            /*KeycloakAuthenticationToken keycloakAuthenticationToken = (KeycloakAuthenticationToken) principal;
-            AccessToken accessToken = keycloakAuthenticationToken.getAccount().getKeycloakSecurityContext().getToken();*/
-
-
-           /* try {
-                String eid = principal.getName();
-                FormUser fuser = UserWrappers.wrapIDTokenToEidasUser(((KeycloakSecurityContext)
-                                req.getAttribute(KeycloakSecurityContext.class.getName())).getIdToken(),eid);*/
-
-                /*fuser.setAffiliation((String)accessToken.getOtherClaims().get("edugain-affiliation"));
-                fuser.setDateOfBirth((String)accessToken.getOtherClaims().get("eidas-dateOfBirth"));
-                fuser.setCurrentFamilyName((String)accessToken.getOtherClaims().get("eidas-familyName"));
-                fuser.setCurrentFamilyName((String)accessToken.getOtherClaims().get("eidas-familyName"));
-                fuser.setEngName((String)accessToken.getOtherClaims().get("edugain-given_name"));
-                fuser.setEngSurname((String)accessToken.getOtherClaims().get("edugain-sn"));
-                fuser.setEmail((String)accessToken.getOtherClaims().get("edugain-mail"));*/
-
-//                String adAccessToken = adService.getAccessToken();
-//                String response = adService.inviteGuestUser(fuser.getEmail(), adAccessToken);
-//                JSONObject jsonObject = (JSONObject) JSONValue.parse(response);
-//                Map<String, String> invitedUser = (HashMap<String, String>) jsonObject.get("invitedUser");
-//                String userId = invitedUser.get("id");
-//
-//                adService.addToTeamsRest(userId, teamId, adAccessToken);
-
-                model.addAttribute("emailForm", new EmailForm());
+            model.addAttribute("emailForm", new EmailForm());
             return new ModelAndView("landingView", model);
-
-            /*} catch (*//*IOException*//* Exception e) {
-                log.error(e.getMessage());
-
-            }*/
         }
         model.addAttribute("error", "could not add user to AD");
         return new ModelAndView("redirect:/error", model);
@@ -135,16 +102,14 @@ public class LoginController {
                               @CookieValue(value = "type", required = false) String typeCookie,
                               HttpServletRequest req, Principal principal, Model model, RedirectAttributes redirectAttrs){
 
-
-        log.info("2222222222222222222 test add email :{}", emailForm.getEmail());
-        //TokenCredential adToken = adService.getAccessTokenAndExDt();
-        //log.info("333333333333333333 adToken :{}", adToken);
-        //AccessToken adAccesToken = new com.azure.core.credential.AccessToken(adToken.getLeft(), OffsetDateTime.parse(adToken.getRight()));*/
         if (principal != null) {
 
             KeycloakAuthenticationToken keycloakAuthenticationToken = (KeycloakAuthenticationToken) principal;
             AccessToken accessToken = keycloakAuthenticationToken.getAccount().getKeycloakSecurityContext().getToken();
 
+            IDToken idToken = ((KeycloakSecurityContext)req.getAttribute(KeycloakSecurityContext.class.getName())).getIdToken();
+
+            String email = idToken.getEmail();
 
             try {
                 String eid = principal.getName();
@@ -159,34 +124,42 @@ public class LoginController {
                 fuser.setEngSurname((String)accessToken.getOtherClaims().get("edugain-sn"));
                 fuser.setEmail((String)accessToken.getOtherClaims().get("edugain-mail"));
 
-                log.info("ooooooooooooooooooooo claims :{}", accessToken.getOtherClaims());
-                //String adAccessToken = adService.getAccessToken();
-
-                log.info("!!!!!!!!!!!!!!!!!! principal name :{}", principal);
-                log.info("@@@@@@@@@@@@@@@@@@@@@@@@@ fuser email name :{}", principal.getName());
-                log.info("ssssssssssssssssssssssssss fuser :{}", fuser);
-                String groupId = adService.getGroupByName("Introduction to e-Privacy and Cybersecurity: Technology and Policy issues");
-                log.info("kkkkkkkkkkkkkkkkkkkkkkk groupId :{}", groupId);
-                String response = adService.inviteGuestUser(fuser.getEmail());
-                JSONObject jsonObject = (JSONObject) JSONValue.parse(response);
+                String adEmail = idToken.getEmail().substring(0,54)+"#EXT#@i4mlabUAegean.onmicrosoft.com";
+                Boolean exists = true;
+                ADUserResponse user = new ADUserResponse();
+                try {
+                    user = adService.checkAdExistence(adEmail);
+                }catch (HttpClientErrorException.NotFound e) {
+                    log.error(e.getMessage());
+                    exists = false;
+                }
+                if(exists && user != null){
+                    handleTeam(user.getId());
+                    return "redirect:/";
+                }
+                String invitedUserResponse = adService.inviteGuestUser(idToken.getEmail());
+                JSONObject jsonObject = (JSONObject) JSONValue.parse(invitedUserResponse);
                 Map<String, String> invitedUser = (HashMap<String, String>) jsonObject.get("invitedUser");
                 String userId = invitedUser.get("id");
-                log.info("####################### user id :{}", userId);
-                log.info("hhhhhhhhhhhhhhhhhhhhhhh update");
                 adService.updateUserEmail(userId, emailForm.getEmail(), fuser.getEngName(), fuser.getEngSurname());
-                log.info("jjjjjjjjjjjjjjjjjjjjjjj add to teams");
-                if(!adService.checkMemberExistence(groupId, userId)){
-                    adService.addToTeamsRest(userId, groupId);
-                }
-
+                handleTeam(userId);
                 return "redirect:/";
-            } catch (/*IOException*/ Exception e) {
+            } catch (Exception e) {
                 log.error(e.getMessage());
 
             }
         }
         model.addAttribute("error", "could not add user to AD");
         return "redirect:/error";
+    }
+
+    private void handleTeam(String userId){
+
+        String groupId = adService.getGroupByName("Introduction to e-Privacy and Cybersecurity: Technology and Policy issues");
+        if(!adService.checkMemberExistence(groupId, userId)){
+            adService.addToTeamsRest(userId, groupId);
+        }
+
     }
 }
 

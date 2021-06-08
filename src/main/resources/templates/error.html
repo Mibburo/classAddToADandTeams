@@ -4,93 +4,162 @@
 
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="author" content="SemiColonWeb" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Stylesheets
   ============================================= -->
 
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
+  <!--    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />-->
 
-  <link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css" th:href="@{/css/bootstrap.css}"/>
-  <link rel="stylesheet" href="../static/style.css" type="text/css" th:href="@{/css/style.css}"/>
-  <!--<link rel="stylesheet" href="css/dark.css" type="text/css" />-->
-  <link rel="stylesheet" href="../static/css/font-icons.css" type="text/css" th:href="@{/css/font-icons.css}" />
-  <link rel="stylesheet" href="../static/css/animate.css" type="text/css" th:href="@{/css/animate.css}"/>
-  <link rel="stylesheet" href="../static/css/magnific-popup.css" type="text/css" th:href="@{/css/magnific-popup.css}"/>
-
-  <link rel="stylesheet" href="../static/css/responsive.css" type="text/css" th:href="@{/css/responsive.css}"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <link rel="stylesheet" href="../static/css/colors.css" type="text/css" th:href="@{/css/colors.css}"/>
-  <link rel="stylesheet" href="../static/css/custom.css" type="text/css" th:href="@{/css/custom.css}"/>
-
-
+  <!--    <link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css" th:href="@{/css/bootstrap.css}"/>-->
+  <link rel="stylesheet" href="../static/css/customNew.css" type="text/css" th:href="@{/css/customNew.css}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
   <!-- Document Title
   ============================================= -->
-  <title>Home | University of the Aegean</title>
+  <title>Home | Smart Class Portal | University of the Aegean</title>
 
 </head>
 
-<body class="stretched">
+<body class="login-body">
+<div class="row">
+  <div class="headerContainer col s12 m10 push-m1 z-depth-2  lighten-5">
 
-<!-- Document Wrapper
-============================================= -->
-<div id="wrapper" class="clearfix">
-
-  <div th:replace="header :: header">This is the header</div>
-
-  <!-- Page Title
-  ============================================= -->
-  <section id="page-title">
-
-    <div class="container clearfix">
-      <h1>Error</h1>
-
-    </div>
-
-  </section><!-- #page-title end -->
-
-  <!-- Content
-  ============================================= -->
-  <div class="container">
-    <h3>An unexpected Error Occurred</h3>
-    <div class="col_full">
-      <div th:text="${error}"></div>
-    </div>
   </div>
+  <div class="input-cart col s12 m10 push-m1 z-depth-2 grey lighten-5">
+    <div class="col s12 m5 login">
+      <h5 class="center darkBlueFont">An unexpected Error Occurred
+      </h5>
+    </div>
+    <!-- Signup form -->
+    <div class="col s12 m7 signup">
+      <div>
+        <h6 class="darkBlueFont" th:text="${error}"></h6>
+      </div>
+    </div>
+    <!--<div class="col s12">
+        <br>
+        <div class="legal center">
+        </div>
+        <div class="legal center">
+            <div class="col s12 m7 right">
+                <p class="grey-text policy center">By signing up, you agree on our <a href="#!">Privacy Policy</a> and  <a href="#!">Terms of Use</a> including <a href="#!">Cookie Use</a>.</p>
+            </div>
+
+        </div>
+
+    </div>-->
+
+
+    <hr class="footerHr">
     <footer id="footer">
 
-      <div class="container">
 
-        <!-- Footer Widgets
-  ============================================= -->
-        <div th:replace="footer :: footer">&copy; 2016 The Static Templates</div>
-        <!-- .footer-widgets-wrap end -->
+      <!-- Footer Widgets
+============================================= -->
+      <div th:replace="footer :: footer"></div>
+      <!-- .footer-widgets-wrap end -->
 
-      </div>
 
       <!-- Copyrights
       ============================================= -->
       <!-- #copyrights end -->
 
     </footer>
+    <!--<div class="footerContainer">
+        <div class="leftFooterContainer">
+            <div class="lfImgAndText">
+                <div>
+                    <img src="../static/images/flagCEF.png"/>
+                </div>
+                <div class="lfImgAndText&#45;&#45;text">
+                    <div>
+                        <b>Co-financed by the European Union</b>
+                        <hr class="hrFtr">
+                    </div>
+                    <div>
+                        Connecting Europe Facility
+                    </div>
+                </div>
+            </div>
+            <div class="btmText">
+                <p>
+                    The UAegean ERASMUS myID Card Service has been co-financed<br>
+                by the Connecting Europe Facility (CEF) of the European Union<br>
+                (Seal Project: Grant Agreement No<br>
+                    INEA/CEF/ICT/A2018/1633170)</p>
+            </div>
 
-    <!-- #footer end -->
+        </div>
 
-  </div><!-- #wrapper end -->
+        <div class="rightFooter">
+            <div>
+                University of the Aegean | Dpt of Financial and Management Engineering | i4m Lab
+            </div>
+            <div>
+                Web address | Dpt: <a href="http://www.fme.aegean.gr/">http://www.fme.aegean.gr/</a>
+            </div>
+            <div>
+                Web address | Lab: <a href="http://www.atlantis-group.gr/i4Mlab">http://www.atlantis-group.gr/i4Mlab</a>
+            </div>
+            <div>
+                E-mail: i4mlab-courses@aegean.gr
+            </div>
+            <div>
+                phone: +30 22510 36165 | e-mail: erasmus@aegean.gr | Skype: Erasmus UAegean
+            </div>
+        </div>
+    </div>-->
+  </div>
 
-  <!-- Go To Top
-  ============================================= -->
-  <div id="gotoTop" class="icon-angle-up"></div>
+</div>
 
-  <!-- External JavaScripts
-  ============================================= -->
-  <script src="../js/jquery.js"></script>
-  <script src="../js/plugins.js"></script>
+</div><!-- #wrapper end -->
 
-  <!-- Footer Scripts
-  ============================================= -->
-  <script src="../js/functions.js"></script>
+<!-- Go To Top
+============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div>
+
+<!-- External JavaScripts
+============================================= -->
+<script src="../js/jquery.js"></script>
+<script src="../js/plugins.js"></script>
+
+<!-- Footer Scripts
+============================================= -->
+<script src="../js/functions.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script>
+  $( document ).ready(function() {
+    $('body').on('change', '#userEmail', function() {
+      if($('#userEmail').val() === $('#userEmailSec').val()){
+        $('#subBtn').prop('disabled', false);
+      } else {
+        $('#subBtn').prop('disabled', true);
+      }
+
+    });
+    $('body').on('change', '#userEmailSec', function() {
+      if($('#userEmail').val() === $('#userEmailSec').val()){
+        $('#subBtn').prop('disabled', false);
+      } else {
+        $('#subBtn').prop('disabled', true);
+      }
+
+    });
+
+    /*let inputElt = document.getElementById('userEmail');
+    let btn = document.getElementById('subBtn');
+
+    inputElt.addEventListener("change", function () {
+        alert('change');
+        btn.disabled = (this.value === '');
+    });*/
+  });
+</script>
 </div>
 
 </body>

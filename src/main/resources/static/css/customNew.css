@@ -84,6 +84,13 @@ body{
     color:#473B6C;
 }
 
+.row .col.m10{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 17.3% !important;
+    width: 65% !important;
+}
+
 @media only screen and (max-width: 900px) {
     .row{
         width: 100% !important;
@@ -93,7 +100,19 @@ body{
     }
     .login{
         width: 100% !important;
+        border-right: none;
     }
-
+    .row .col.m10{
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        left: 0 !important;
+    }
 }
+
+.errMsg {
+    color: red !important;
+}
+
+
 

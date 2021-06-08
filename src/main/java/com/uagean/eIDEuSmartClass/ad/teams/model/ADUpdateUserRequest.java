@@ -8,7 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ADUpdateUserRequest {
-    private  String mail;
+    private String mail;
     private String givenName;
     private String surname;
+    private String displayName;
 }

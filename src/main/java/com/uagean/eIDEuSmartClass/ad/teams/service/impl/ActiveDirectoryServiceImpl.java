@@ -214,7 +214,8 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
     public String updateUserEmail(String userId, String userEmail, String givenName, String surname) {
         String accessToken = getAccessToken();
         String updateEndpoint = "https://graph.microsoft.com/v1.0/users/" + userId;
-        ADUpdateUserRequest updateObject = new ADUpdateUserRequest(userEmail, givenName, surname);
+        String displayName = givenName + " " + surname;
+        ADUpdateUserRequest updateObject = new ADUpdateUserRequest(userEmail, givenName, surname, displayName);
 
         RestTemplate restTemplate = new RestTemplate();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();

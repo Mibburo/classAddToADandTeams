@@ -55,4 +55,11 @@ public class TestADService {
         System.out.println(adserv.checkEmailAvailability("testemailKB@email.com"));
     }
 
+    @Test
+    public void updateEmail(){
+        ActiveDirectoryService adserv = new ActiveDirectoryServiceImpl();
+        System.out.println(adserv.updateUserEmail("1ffca454-859b-4097-9471-ea9f20c7cf6f", "testemailKB2@email.com", "konTest", "BitTest"));
+    }
+
+
 }

@@ -10,7 +10,7 @@
 .switch label input[type="checkbox"]:checked + .lever{background-color:#ADD0EB;}
 .switch label input[type="checkbox"]:checked + .lever::after{background-color: #4FB0FD ;}
 /*.login-body{background-image:url(http://i.imgur.com/aBayW5C.png);background-size:cover;background-position: center;background-attachment:fixed;}*/
-.input-cart{min-height:400px;border-top:3px solid #0056b3;margin-bottom:100px;}
+.input-cart{min-height:400px;border-top:3px solid rgb(3.49884%,12.199402%,31.799316%);margin-bottom:100px;}
 .login{margin-top:3rem;border-right:1px solid #ddd;}
 .policy{visibility: hidden;}
 .signupForm{display: none;}
@@ -32,22 +32,23 @@ body{
     color: #071e4f !important;
 }
 .blueFont{
-    color: #0056b3 !important;
+    color: rgb(3.49884%,12.199402%,31.799316%) !important;
 }
 
 .footerHr{
-    border-color: #0056b3 !important;
+    border-color: rgb(3.49884%,12.199402%,31.799316%) !important;
 }
 .rightEl{
     float: right !important;
 }
 
 .listEl{
-    padding-bottom: 1rem !important;
+    padding-bottom: 0.5rem !important;
+    /*margin-left: 2rem;*/
 }
 .inputEl:focus {
-    border-bottom: 0.1rem solid #0056b3 !important;
-    box-shadow: 0 0.1rem 0 0 #0056b3 !important;
+    border-bottom: 0.1rem solid rgb(3.49884%,12.199402%,31.799316%) !important;
+    box-shadow: 0 0.1rem 0 0 rgb(3.49884%,12.199402%,31.799316%) !important;
 }
 
 .lfImgAndText{
@@ -61,7 +62,7 @@ body{
 }
 
 .headerContainer{
-    background-color: #0056b3 !important;
+    background-color: rgb(3.49884%,12.199402%,31.799316%) !important;
     height: 200px;
 }
 
@@ -91,12 +92,23 @@ body{
     width: 65% !important;
 }
 
-@media only screen and (max-width: 900px) {
+.login{
+    border-right: none;
+    width:43% !important;
+}
+
+.signup{
+    width:50% !important;
+    margin-left: 3rem !important;
+}
+
+@media only screen and (max-width: 980px) {
     .row{
         width: 100% !important;
     }
     .signup{
         width: 100% !important;
+        height: 20rem !important;
     }
     .login{
         width: 100% !important;
@@ -117,5 +129,26 @@ body{
     font-size: 12px;
 }
 
+h6.darkBlueFont{
+    font-size: 18px !important;
+}
 
+h5.darkBlueFont{
+    font-size: 20px !important;
+}
+
+.headerLogo{
+    padding-top: 3.5rem !important;
+    padding-left: 4rem;
+}
+
+.uAegLogo{
+    width:218px;
+}
+
+.rightFooter{
+    margin-top: auto;
+    margin-bottom: auto;
+    width:52%;
+}
 

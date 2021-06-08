@@ -24,6 +24,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.util.StringUtils;
 
 /**
  *
@@ -47,6 +48,8 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
     public static final String ACTIVE_DIRECTORY_TOKEN_ENDPOINT = "https://login.microsoftonline.com/d4a81dbe-9310-4d28-b060-dc9cd82a3b8b/oauth2/token";
     public static final String CLIENT_ID = "29937bdf-4ead-4618-9c79-1139e2687aae";
     public static final String CLIENT_SECRET = "..01zo91D2Hl-~EdFmtOlCAgy94~49j8U~";
+    public final static String BASE_URL = StringUtils.isEmpty(System.getenv("BASE_URL"))?"http://localhost:9090/":System.getenv("BASE_URL");
+
 
     private final String USER_AGENT = "Mozilla/5.0";
 
@@ -96,7 +99,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
         headers.set("Authorization", "Bearer "+accessToken);
 
         ADGuestInviteRequest guestJsonObject = new ADGuestInviteRequest();
-        guestJsonObject.setInviteRedirectUrl("http://localhost");
+        guestJsonObject.setInviteRedirectUrl(BASE_URL);
         guestJsonObject.setInvitedUserEmailAddress(userEmail);
 
         HttpEntity<ADGuestInviteRequest> entity = new HttpEntity<ADGuestInviteRequest>(guestJsonObject,headers);
@@ -161,7 +164,6 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
             headers.set("Authorization", "Bearer "+accessToken);
             HttpEntity request = new HttpEntity(headers);
             ResponseEntity<String> response = restTemplate.exchange(getMembersEP, HttpMethod.GET, request, String.class, 1);
-            log.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ status code :{}", response.getStatusCode());
             ObjectMapper mapper = new ObjectMapper();
             try {
                 ADUserResponse user = mapper.readValue(response.getBody(), ADUserResponse.class);
@@ -227,6 +229,30 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
         String result = restTemplate.patchForObject(updateEndpoint, entity, String.class);
 
         return result;
+    }
+
+    @Override
+    public Boolean checkEmailAvailability(String email){
+
+        String accessToken = getAccessToken();
+        String getMemberEmail = "https://graph.microsoft.com/v1.0/users?$search=\"mail:"+email+"\"";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer "+accessToken);
+        headers.set("ConsistencyLevel", "eventual");
+        HttpEntity request = new HttpEntity(headers);
+        ResponseEntity<String> response = restTemplate.exchange( getMemberEmail, HttpMethod.GET, request, String.class, 1);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ADUserWrapper users = mapper.readValue(response.getBody(), ADUserWrapper.class);
+            if(users.getResponses().isEmpty()){
+                return true;
+            }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

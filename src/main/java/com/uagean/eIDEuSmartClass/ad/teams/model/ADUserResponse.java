@@ -17,6 +17,8 @@ import java.util.List;
 public class ADUserResponse {
 
 
+    @JsonProperty("@odata.id")
+    private String dataId;
     @JsonProperty("@odata.context")
     private String dataContext;
     @JsonProperty("@odata.type")

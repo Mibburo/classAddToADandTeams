@@ -111,7 +111,10 @@ body{
 }
 
 .errMsg {
+    margin-bottom:0.2rem;
+    padding-left: 0.2rem;
     color: red !important;
+    font-size: 12px;
 }
 
 

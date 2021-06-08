@@ -39,13 +39,20 @@ public class TestADService {
     @Test
     public void testGetMembers(){
         ActiveDirectoryService adserv = new ActiveDirectoryServiceImpl();
-        System.out.println(adserv.checkMemberExistence("cfbefafc-ec6e-45c5-9e81-9125995e43ca", "f54198c6-0c71-413c-bdc4-b021463a7745" ));
+        System.out.println(adserv.checkMemberExistence("cfbefafc-ec6e-45c5-9e81-9125995e43ca", "e57bc86f-5902-4930-82ae-a1dd80fbb676" ));
     }
 
     @Test
     public void testGetAdMembers(){
         ActiveDirectoryService adserv = new ActiveDirectoryServiceImpl();
         adserv.checkAdExistence("be071f2756a30deb4e672a99904e8a4ab4ae33432a4c959d40ddf1#EXT#@i4mlabUAegean.onmicrosoft.com");
+    }
+
+
+    @Test
+    public void testGetMemberEmail(){
+        ActiveDirectoryService adserv = new ActiveDirectoryServiceImpl();
+        System.out.println(adserv.checkEmailAvailability("testemailKB@email.com"));
     }
 
 }

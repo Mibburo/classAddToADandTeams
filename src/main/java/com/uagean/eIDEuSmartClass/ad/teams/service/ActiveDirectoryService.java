@@ -12,5 +12,6 @@ public interface ActiveDirectoryService {
     public String addToTeamsRest(String userId, String teamId);
     public ADUserResponse checkAdExistence(String userEmail);
     public String updateUserEmail(String userId, String userEmail, String givenName, String surname);
+    public Boolean checkEmailAvailability(String email);
 
 }

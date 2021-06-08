@@ -39,7 +39,7 @@
                         <label for="userEmail">
                             <i class="material-icons blueFont">mail</i>
                         </label>
-                        <div class="errMsg" th:field="*{message}"></div>
+                        <div class="errMsg" th:text="${errMessage}"></div>
 
 <!--                        <input type="email" id="userEmail" class="validate" required="required" placeholder="email" th:field="*{email}" />-->
 
@@ -166,18 +166,25 @@
 
 <!-- External JavaScripts
 ============================================= -->
-<script src="../js/jquery.js"></script>
-<script src="../js/plugins.js"></script>
 
 <!-- Footer Scripts
 ============================================= -->
-<script src="../js/functions.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 <script>
     $( document ).ready(function() {
+
+        if(!$('#userEmail').val().trim()){
+            $('#subBtn').prop('disabled', true);
+        } else {
+            if($('#userEmail').val() === $('#userEmailSec').val()){
+                $('#subBtn').prop('disabled', false);
+            }
+        }
+
+
         $('body').on('change', '#userEmail', function() {
             if($('#userEmail').val() === $('#userEmailSec').val()){
                 $('#subBtn').prop('disabled', false);

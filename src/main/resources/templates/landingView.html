@@ -8,10 +8,6 @@
 
     <!-- Stylesheets
     ============================================= -->
-
-<!--    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />-->
-
-<!--    <link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css" th:href="@{/css/bootstrap.css}"/>-->
     <link rel="stylesheet" href="../static/css/customNew.css" type="text/css" th:href="@{/css/customNew.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
@@ -40,11 +36,6 @@
                             <i class="material-icons blueFont">mail</i>
                         </label>
                         <div class="errMsg" th:text="${errMessage}"></div>
-
-<!--                        <input type="email" id="userEmail" class="validate" required="required" placeholder="email" th:field="*{email}" />-->
-
-
-<!--                        <input type="email" id="user" name="username" class="validate" required="required" placeholder="email">-->
                     </div>
                 </div>
                 <div class="row">
@@ -53,8 +44,6 @@
                         <label for="userEmailSec" >
                             <i class="material-icons blueFont">mail</i>
                         </label>
-<!--                        <label class="form-label" for="userEmailSec">Please re-enter your email</label>-->
-
                     </div>
                 </div>
                 <div class="row">
@@ -81,94 +70,19 @@
                 </div>
             </div>
         </div>
-        <!--<div class="col s12">
-            <br>
-            <div class="legal center">
-            </div>
-            <div class="legal center">
-                <div class="col s12 m7 right">
-                    <p class="grey-text policy center">By signing up, you agree on our <a href="#!">Privacy Policy</a> and  <a href="#!">Terms of Use</a> including <a href="#!">Cookie Use</a>.</p>
-                </div>
-
-            </div>
-
-        </div>-->
 
 
             <hr class="footerHr">
         <footer id="footer">
-
-
-                <!-- Footer Widgets
-          ============================================= -->
                 <div th:replace="footer :: footer"></div>
-                <!-- .footer-widgets-wrap end -->
-
-
-            <!-- Copyrights
-            ============================================= -->
-            <!-- #copyrights end -->
 
         </footer>
-        <!--<div class="footerContainer">
-            <div class="leftFooterContainer">
-                <div class="lfImgAndText">
-                    <div>
-                        <img src="../static/images/flagCEF.png"/>
-                    </div>
-                    <div class="lfImgAndText&#45;&#45;text">
-                        <div>
-                            <b>Co-financed by the European Union</b>
-                            <hr class="hrFtr">
-                        </div>
-                        <div>
-                            Connecting Europe Facility
-                        </div>
-                    </div>
-                </div>
-                <div class="btmText">
-                    <p>
-                        The UAegean ERASMUS myID Card Service has been co-financed<br>
-                    by the Connecting Europe Facility (CEF) of the European Union<br>
-                    (Seal Project: Grant Agreement No<br>
-                        INEA/CEF/ICT/A2018/1633170)</p>
-                </div>
 
-            </div>
-
-            <div class="rightFooter">
-                <div>
-                    University of the Aegean | Dpt of Financial and Management Engineering | i4m Lab
-                </div>
-                <div>
-                    Web address | Dpt: <a href="http://www.fme.aegean.gr/">http://www.fme.aegean.gr/</a>
-                </div>
-                <div>
-                    Web address | Lab: <a href="http://www.atlantis-group.gr/i4Mlab">http://www.atlantis-group.gr/i4Mlab</a>
-                </div>
-                <div>
-                    E-mail: i4mlab-courses@aegean.gr
-                </div>
-                <div>
-                    phone: +30 22510 36165 | e-mail: erasmus@aegean.gr | Skype: Erasmus UAegean
-                </div>
-            </div>
-        </div>-->
     </div>
 
 </div>
 
-</div><!-- #wrapper end -->
-
-<!-- Go To Top
-============================================= -->
-<div id="gotoTop" class="icon-angle-up"></div>
-
-<!-- External JavaScripts
-============================================= -->
-
-<!-- Footer Scripts
-============================================= -->
+</div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
@@ -201,14 +115,6 @@
             }
 
         });
-
-        /*let inputElt = document.getElementById('userEmail');
-        let btn = document.getElementById('subBtn');
-
-        inputElt.addEventListener("change", function () {
-            alert('change');
-            btn.disabled = (this.value === '');
-        });*/
     });
 </script>
 </div>

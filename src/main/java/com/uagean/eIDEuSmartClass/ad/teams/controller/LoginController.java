@@ -151,6 +151,11 @@ public class LoginController {
             emailForm.setMessage("Email invalid format, please correct it");
             return false;
         }
+
+        if (!emailForm.getEmail().equals(emailForm.getEmailSec())){
+            emailForm.setMessage("Emails do not match");
+            return false;
+        }
         return true;
     }
 }

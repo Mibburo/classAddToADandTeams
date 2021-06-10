@@ -10,5 +10,6 @@ import lombok.*;
 public class ADGuestInviteRequest {
     private String invitedUserEmailAddress;
     private String inviteRedirectUrl;
+    private Boolean sendInvitationMessage;
 
 }

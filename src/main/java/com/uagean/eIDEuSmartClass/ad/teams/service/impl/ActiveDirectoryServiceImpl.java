@@ -101,6 +101,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
         ADGuestInviteRequest guestJsonObject = new ADGuestInviteRequest();
         guestJsonObject.setInviteRedirectUrl(BASE_URL);
         guestJsonObject.setInvitedUserEmailAddress(userEmail);
+        guestJsonObject.setSendInvitationMessage(true);
 
         HttpEntity<ADGuestInviteRequest> entity = new HttpEntity<ADGuestInviteRequest>(guestJsonObject,headers);
         String result = restTemplate.postForObject(invitationEndpoint, entity, String.class);
@@ -214,7 +215,8 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
     public String updateUserEmail(String userId, String userEmail, String givenName, String surname) {
         String accessToken = getAccessToken();
         String updateEndpoint = "https://graph.microsoft.com/v1.0/users/" + userId;
-        String displayName = givenName + " " + surname;
+
+        String displayName = getOneName(givenName) + " " + getOneName(surname);
         ADUpdateUserRequest updateObject = new ADUpdateUserRequest(userEmail, givenName, surname, displayName);
 
         RestTemplate restTemplate = new RestTemplate();
@@ -254,6 +256,13 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    private String getOneName(String name){
+        if(name.contains(" ")){
+            return name.split(" ")[0];
+        }
+        return name;
     }
 
 }

@@ -64,9 +64,11 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/rest/**").permitAll()
                 .antMatchers("/rest/nonce/**").permitAll()
+                .antMatchers("/ssi/registerEmail").permitAll()
                 .antMatchers("/addGuest").hasRole("offline_access")
+                .antMatchers("/viewResult").hasRole("offline_access")
                 .antMatchers("/ssi/**").hasRole("offline_access")
-                .antMatchers("/ssi/registerEmail").hasRole("offline_access")
+                //.antMatchers("/ssi/registerEmail").hasRole("offline_access")
                 .antMatchers("/eidas/**").hasRole("offline_access")
                 .antMatchers("/admin/**").hasRole("offline_access")
 

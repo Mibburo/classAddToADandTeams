@@ -10,7 +10,11 @@
 .switch label input[type="checkbox"]:checked + .lever{background-color:#ADD0EB;}
 .switch label input[type="checkbox"]:checked + .lever::after{background-color: #4FB0FD ;}
 /*.login-body{background-image:url(http://i.imgur.com/aBayW5C.png);background-size:cover;background-position: center;background-attachment:fixed;}*/
-.input-cart{min-height:400px;border-top:3px solid rgb(3.49884%,12.199402%,31.799316%);margin-bottom:100px;}
+.input-cart{
+    min-height:400px;
+    border-top:3px solid rgb(3.49884%,12.199402%,31.799316%);
+    margin-bottom:100px;
+}
 .login{margin-top:3rem;border-right:1px solid #ddd;}
 .policy{visibility: hidden;}
 .signupForm{display: none;}
@@ -84,12 +88,21 @@ body{
     margin-right: 0.5rem;
     color:#473B6C;
 }
+.mContainer{
+    display: flex !important;
+    flex-direction: column !important;
+    /*align-items: center !important;*/
+}
 
+.rContainer{
+    width: 82% !important;
+}
 .row .col.m10{
-    margin-left: auto !important;
-    margin-right: auto !important;
-    left: 17.3% !important;
-    width: 65% !important;
+    /*margin-left: auto !important;*/
+    /*margin-right: auto !important;*/
+    /*!*left: 17.3% !important;*!*/
+    /*width: 65% !important;*/
+    /*left:auto !important;*/
 }
 
 .login{
@@ -150,5 +163,9 @@ h5.darkBlueFont{
     margin-top: auto;
     margin-bottom: auto;
     width:52%;
+}
+
+.result{
+    width: 100% !important;
 }
 

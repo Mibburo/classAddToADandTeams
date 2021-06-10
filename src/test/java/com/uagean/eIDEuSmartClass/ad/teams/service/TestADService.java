@@ -22,7 +22,7 @@ public class TestADService {
     @Test
     public void testMakeGuest(){
         ActiveDirectoryService adserv = new ActiveDirectoryServiceImpl();
-        System.out.println(adserv.inviteGuestUser("testemailKB@email.com"));
+        System.out.println(adserv.inviteGuestUser("testEmailKB1234@email.com"));
     }
 
     @Test

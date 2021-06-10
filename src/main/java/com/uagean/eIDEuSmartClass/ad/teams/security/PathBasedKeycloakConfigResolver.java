@@ -36,6 +36,7 @@ public class PathBasedKeycloakConfigResolver implements KeycloakConfigResolver {
                 || request.getRelativePath().contains("/team")
                 || request.getRelativePath().contains("/sso")
                 || request.getRelativePath().contains("/addGuest")
+                || request.getRelativePath().contains("/viewResult")
                 || request.getRelativePath().contains("/logout")//pending selectConf logout roomaccess
                 || request.getRelativePath().contains("/roomaccess")//pending selectConf logout roomaccess
 

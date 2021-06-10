@@ -8,7 +8,6 @@
 
   <!-- Stylesheets
   ============================================= -->
-
   <link rel="stylesheet" href="../static/css/customNew.css" type="text/css" th:href="@{/css/customNew.css}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
@@ -29,35 +28,67 @@
     </div>
     <div class="input-cart col s12 m10 push-m1 z-depth-2 grey lighten-5">
       <div>
-        <div class="col s12 m5 login">
-          <h5 class="center darkBlueFont">An unexpected Error Occurred
-          </h5>
+
+      <!-- Signup form -->
+      <div class="col s12 m7 signup result">
+        <div>
+          <h5 class="darkBlueFont center">Thank you for registering, an email has been sent to the provided email address<br>
+            Please follow the instructions offered in the email </h5>
         </div>
-        <!-- Signup form -->
-        <div class="col s12 m7 signup">
-          <div>
-            <h6 class="darkBlueFont" th:text="${error}"></h6>
-          </div>
-        </div>
-      </div>
-
-      <div>
-
-        <footer id="footer">
-          <div th:replace="footer :: footer"></div>
-        </footer>
-
       </div>
     </div>
 
+    <div>
+
+      <footer id="footer">
+        <div th:replace="footer :: footer"></div>
+      </footer>
+
+    </div>
   </div>
 
 </div>
 
+</div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script>
+  $( document ).ready(function() {
+
+    if(!$('#userEmail').val().trim()){
+      $('#subBtn').prop('disabled', true);
+    } else {
+      if($('#userEmail').val() === $('#userEmailSec').val()){
+        $('#subBtn').prop('disabled', false);
+      }
+    }
+
+
+    $('body').on('change', '#userEmail', function() {
+      if(!$('#userEmail').val().trim()) {
+        $('#subBtn').prop('disabled', true);
+      }else{
+        if($('#userEmail').val() === $('#userEmailSec').val()){
+          $('#subBtn').prop('disabled', false);
+        } else {
+          $('#subBtn').prop('disabled', true);
+        }
+      }
+
+    });
+    $('body').on('change', '#userEmailSec', function() {
+
+      if($('#userEmail').val() === $('#userEmailSec').val()){
+        $('#subBtn').prop('disabled', false);
+      } else {
+        $('#subBtn').prop('disabled', true);
+      }
+
+    });
+  });
+</script>
 </div>
 
 </body>

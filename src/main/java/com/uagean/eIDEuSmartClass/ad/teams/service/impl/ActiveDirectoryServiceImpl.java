@@ -99,7 +99,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
         headers.set("Authorization", "Bearer "+accessToken);
 
         ADGuestInviteRequest guestJsonObject = new ADGuestInviteRequest();
-        guestJsonObject.setInviteRedirectUrl(BASE_URL);
+        guestJsonObject.setInviteRedirectUrl("https://teams.microsoft.com/l/team/19%3aAc94KrdWWIveviMqzG5ngZGvA11kzHtbF5JLVDUMjMU1%40thread.tacv2/conversations?groupId=cfbefafc-ec6e-45c5-9e81-9125995e43ca&tenantId=d4a81dbe-9310-4d28-b060-dc9cd82a3b8b");
         guestJsonObject.setInvitedUserEmailAddress(userEmail);
         guestJsonObject.setSendInvitationMessage(true);
 

@@ -94,8 +94,6 @@ public class LoginController {
                 fuser.setEngSurname((String)accessToken.getOtherClaims().get("edugain-sn"));
                 fuser.setEmail((String)accessToken.getOtherClaims().get("edugain-mail"));
 
-
-                log.info("AAAAAAAAAAAAAAAAAAAAAAA fuser attr :{}", fuser);
                 String adEmail = idToken.getEmail().substring(0,54)+"#EXT#@i4mlabUAegean.onmicrosoft.com";
                 if(!adService.checkEmailAvailability(emailForm.getEmail())){
                     emailForm.setMessage("Email already exists, please use an other");

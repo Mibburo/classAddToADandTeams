@@ -14,4 +14,5 @@ public class EmailForm {
     private String email;
     private String emailSec;
     private String message;
+    private String errorMsg;
 }

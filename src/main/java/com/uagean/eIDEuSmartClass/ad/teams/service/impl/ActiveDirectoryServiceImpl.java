@@ -1,6 +1,5 @@
 package com.uagean.eIDEuSmartClass.ad.teams.service.impl;
 
-import com.azure.core.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +9,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import com.microsoft.graph.models.*;
 import com.uagean.eIDEuSmartClass.ad.teams.model.*;
 import com.uagean.eIDEuSmartClass.ad.teams.service.ActiveDirectoryService;
 import com.uagean.eIDEuSmartClass.ad.teams.service.ConfigPropertiesServices;
@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -99,7 +98,8 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
         headers.set("Authorization", "Bearer "+accessToken);
 
         ADGuestInviteRequest guestJsonObject = new ADGuestInviteRequest();
-        guestJsonObject.setInviteRedirectUrl("https://teams.microsoft.com/l/team/19%3aAc94KrdWWIveviMqzG5ngZGvA11kzHtbF5JLVDUMjMU1%40thread.tacv2/conversations?groupId=cfbefafc-ec6e-45c5-9e81-9125995e43ca&tenantId=d4a81dbe-9310-4d28-b060-dc9cd82a3b8b");
+        //guestJsonObject.setInviteRedirectUrl("https://teams.microsoft.com/l/team/19%3aAc94KrdWWIveviMqzG5ngZGvA11kzHtbF5JLVDUMjMU1%40thread.tacv2/conversations?groupId=cfbefafc-ec6e-45c5-9e81-9125995e43ca&tenantId=d4a81dbe-9310-4d28-b060-dc9cd82a3b8b");
+        guestJsonObject.setInviteRedirectUrl("https://www.microsoft.com/en-ww/microsoft-teams/log-in");
         guestJsonObject.setInvitedUserEmailAddress(userEmail);
         guestJsonObject.setSendInvitationMessage(true);
 
@@ -212,12 +212,12 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
     }
 
     @Override
-    public String updateUserEmail(String userId, String userEmail, String givenName, String surname) {
+    public String updateUserName(String userId, String givenName, String surname) {
         String accessToken = getAccessToken();
         String updateEndpoint = "https://graph.microsoft.com/v1.0/users/" + userId;
 
-        String displayName = getOneName(givenName) + " " + getOneName(surname);
-        ADUpdateUserRequest updateObject = new ADUpdateUserRequest(userEmail, givenName, surname, displayName);
+        String displayName = getOneName(givenName) + "." + getOneName(surname);
+        ADUpdateUserRequest updateObject = new ADUpdateUserRequest(givenName, surname, displayName);
 
         RestTemplate restTemplate = new RestTemplate();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();

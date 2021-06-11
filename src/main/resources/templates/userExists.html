@@ -8,7 +8,6 @@
 
   <!-- Stylesheets
   ============================================= -->
-
   <link rel="stylesheet" href="../static/css/customNew.css" type="text/css" th:href="@{/css/customNew.css}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
@@ -29,14 +28,22 @@
     </div>
     <div class="input-cart col s12 m10 push-m1 z-depth-2 grey lighten-5">
       <div>
-        <div class="col s12 m5 login">
-          <h5 class="center darkBlueFont">An unexpected Error Occurred
-          </h5>
-        </div>
-        <!-- Signup form -->
-        <div class="col s12 m7 signup">
-          <div>
-            <h6 class="darkBlueFont" th:text="${#strings.isEmpty(error)}? ${errorMsg} : ${error}"></h6>
+
+        <div class="resContainer">
+          <div class="col s12 m7 signup result">
+            <div>
+              <h5 class="darkBlueFont">UAegean i4m Lab</h5>
+
+              <hr class="hrFtr">
+              <p>
+                This user is already registered with the Teams related to the Course “e-Privacy and Cybersecurity: Technology and Policy issues”,
+
+              </p>
+              <p>
+                Please login to Teams with your Microsoft account related to the email address you have registered with the Course, a few minutes ago - <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?response_type=id_token&scope=openid%20profile&client_id=5e3ce6c0-2b1f-4285-8d4b-75ee78787346&redirect_uri=https%3A%2F%2Fteams.microsoft.com%2Fgo&state=eyJpZCI6IjM3M2FjMGFhLTQ4ODctNDZlNi1iNmI2LWU1OTFjODgyYmZiYiIsInRzIjoxNjIzNDI4Mzg4LCJtZXRob2QiOiJyZWRpcmVjdEludGVyYWN0aW9uIn0%3D&nonce=878a44c2-675d-41e3-8a6d-4ab2fd3122cd&client_info=1&x-client-SKU=MSAL.JS&x-client-Ver=1.3.4&client-request-id=6ed2c6cf-b260-4e72-989b-df67dedffea8&response_mode=fragment">Sign in</a> to Teams.
+              </p>
+
+            </div>
           </div>
         </div>
       </div>
@@ -53,7 +60,6 @@
   </div>
 
 </div>
-
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>

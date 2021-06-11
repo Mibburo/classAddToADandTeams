@@ -11,7 +11,7 @@ public interface ActiveDirectoryService {
     public String getGroupByName(String groupName);
     public String addToTeamsRest(String userId, String teamId);
     public ADUserResponse checkAdExistence(String userEmail);
-    public String updateUserEmail(String userId, String userEmail, String givenName, String surname);
+    public String updateUserName(String userId, String givenName, String surname);
     public Boolean checkEmailAvailability(String email);
 
 }

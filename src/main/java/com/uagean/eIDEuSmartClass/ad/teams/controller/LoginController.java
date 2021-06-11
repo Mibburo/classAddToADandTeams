@@ -1,7 +1,9 @@
 package com.uagean.eIDEuSmartClass.ad.teams.controller;
 
+import com.azure.core.annotation.Get;
 import com.uagean.eIDEuSmartClass.ad.teams.model.*;
 import com.uagean.eIDEuSmartClass.ad.teams.service.ActiveDirectoryService;
+import com.uagean.eIDEuSmartClass.ad.teams.service.MailService;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import net.minidev.json.JSONValue;
@@ -35,6 +37,9 @@ public class LoginController {
     @Autowired
     private ActiveDirectoryService adService;
 
+    @Autowired
+    private MailService mailService;
+
     public final static String TOKEN_NAME = "access_token";
     public final static String TEAM_ID = "cfbefafc-ec6e-45c5-9e81-9125995e43ca"; //groupId
     // tenant-id = d4a81dbe-9310-4d28-b060-dc9cd82a3b8b
@@ -54,12 +59,8 @@ public class LoginController {
     public ModelAndView login(@ModelAttribute (EMAIL_FORM) EmailForm emailForm, @CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
                         @CookieValue(value = "type", required = false) String typeCookie,
                         HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs) {
-        //if (principal != null) {
             model.addAttribute("errMessage", emailForm.getMessage());
             return new ModelAndView("landingView", model);
-        //}
-//        model.addAttribute("error", "could not add user to AD");
-//        return new ModelAndView("redirect:/error", model);
     }
 
     @RequestMapping("/addGuest")
@@ -71,7 +72,6 @@ public class LoginController {
             return new ModelAndView("redirect:/ssi/registerEmail");
         }
 
-        //return new ModelAndView("redirect:/ssi/registerEmail");
         if (principal != null) {
 
             KeycloakAuthenticationToken keycloakAuthenticationToken = (KeycloakAuthenticationToken) principal;
@@ -94,38 +94,43 @@ public class LoginController {
                 fuser.setEngSurname((String)accessToken.getOtherClaims().get("edugain-sn"));
                 fuser.setEmail((String)accessToken.getOtherClaims().get("edugain-mail"));
 
-                String adEmail = idToken.getEmail().substring(0,54)+"#EXT#@i4mlabUAegean.onmicrosoft.com";
-                if(!adService.checkEmailAvailability(emailForm.getEmail())){
-                    emailForm.setMessage("Email already exists, please use an other");
-                    redirectAttrs.addFlashAttribute(EMAIL_FORM, emailForm);
-                    return new ModelAndView("redirect:/ssi/registerEmail");
-                }
+                String principalName = emailForm.getEmail().split("@")[0].length()>55? emailForm.getEmail().substring(0,54)+"#EXT#@i4mlabUAegean.onmicrosoft.com" : emailForm.getEmail().replace("@", "_") + "#EXT#@i4mlabUAegean.onmicrosoft.com";
+
                 Boolean exists = true;
                 ADUserResponse user = new ADUserResponse();
                 try {
-                    user = adService.checkAdExistence(emailForm.getEmail());
+                    user = adService.checkAdExistence(principalName);
                 }catch (HttpClientErrorException.NotFound e) {
                     log.error(e.getMessage());
                     exists = false;
                 }
                 if(exists && user != null){
                     handleTeam(user.getId());
-                    return new ModelAndView("redirect:/viewResult");
+                    return new ModelAndView("redirect:/userExists");
                 }
+
+                if(!adService.checkEmailAvailability(emailForm.getEmail())){
+                    emailForm.setMessage("Email already exists, please use an other");
+                    redirectAttrs.addFlashAttribute(EMAIL_FORM, emailForm);
+                    return new ModelAndView("redirect:/ssi/registerEmail");
+                }
+
                 String invitedUserResponse = adService.inviteGuestUser(emailForm.getEmail());
                 JSONObject jsonObject = (JSONObject) JSONValue.parse(invitedUserResponse);
                 Map<String, String> invitedUser = (HashMap<String, String>) jsonObject.get("invitedUser");
                 String userId = invitedUser.get("id");
-                adService.updateUserEmail(userId, emailForm.getEmail(), fuser.getEngName(), fuser.getEngSurname());
+                adService.updateUserName(userId, fuser.getEngName(), fuser.getEngSurname());
                 handleTeam(userId);
+                mailService.prepareAndSendEmail(emailForm.getEmail());
                 return new ModelAndView("redirect:/viewResult");
             } catch (Exception e) {
                 log.error(e.getMessage());
 
             }
         }
-        model.addAttribute("error", "could not add user to AD");
-        return new ModelAndView("redirect:/error", model);
+        emailForm.setErrorMsg("could not add user to AD");
+        redirectAttrs.addFlashAttribute(EMAIL_FORM, emailForm);
+        return new ModelAndView("redirect:/errorPage");
     }
 
     @GetMapping("/viewResult")
@@ -134,6 +139,25 @@ public class LoginController {
                                       HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs){
 
         return new ModelAndView("result", model);
+
+    }
+
+    @GetMapping("/errorPage")
+    protected ModelAndView errorPage(@ModelAttribute (EMAIL_FORM) EmailForm emailForm, @CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
+                                      @CookieValue(value = "type", required = false) String typeCookie, Errors errors,
+                                      HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs){
+
+        model.addAttribute("errorMsg", emailForm.getErrorMsg());
+        return new ModelAndView("error", model);
+
+    }
+
+    @GetMapping("/userExists")
+    protected ModelAndView userExistsPage(@ModelAttribute (EMAIL_FORM) EmailForm emailForm, @CookieValue(value = TOKEN_NAME, required = false) String jwtCookie,
+                                      @CookieValue(value = "type", required = false) String typeCookie, Errors errors,
+                                      HttpServletRequest req, Principal principal, ModelMap model, RedirectAttributes redirectAttrs){
+
+        return new ModelAndView("userExists", model);
 
     }
 

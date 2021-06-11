@@ -167,5 +167,23 @@ h5.darkBlueFont{
 
 .result{
     width: 100% !important;
+    margin-left:auto !important;
 }
+
+.resContainer{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bulletPointEl{
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+.identEl{
+    margin-left: 2rem;
+}
+
 

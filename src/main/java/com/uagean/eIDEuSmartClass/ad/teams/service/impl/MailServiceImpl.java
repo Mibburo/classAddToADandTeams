@@ -25,7 +25,7 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class MailServiceImpl implements MailService {
 
-    private final static String MAIL_FRIENDLY_NAME = " i4mLab@UAegean";
+    private final static String MAIL_FRIENDLY_NAME = " onlinecourses@i4mlabUAegean.onmicrosoft.com ";
     private final String FROM = "smartclass@i4mlabUAegean.onmicrosoft.com";
     private static Logger log = LoggerFactory.getLogger(MailService.class);
 
@@ -40,7 +40,7 @@ public class MailServiceImpl implements MailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
             helper.setTo(recipient);
             helper.setFrom(new InternetAddress(FROM, MAIL_FRIENDLY_NAME));
-            helper.setSubject("WCourse on e-Privacy and Cybersecurity: You can now connect to Teams (Microsoft)");
+            helper.setSubject("Course on e-Privacy and Cybersecurity: You can now connect to Teams (Microsoft)");
             String content = MailContentBuilder.buildEmail();
 
             helper.setText(content, true);

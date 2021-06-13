@@ -45,6 +45,11 @@ public class MailContentBuilder {
             "</p>\n" +
             "<p>\n" +
             "<b>Important</b>: When you enter Teams, please select the domain “i4mLab@UAegean (Guest)'' at the right corner of the application.\n" +
+            "</p>\n" +
+            "<p>\n" +
+            "You are IN!: Select your <b>Course</b> Team\n" +
+            "<br>\n" +
+            "Introduction to e-Privacy and Cybersecurity: Technology and Policy issues \n" +
             "</p>\n";
 
     private final static String footer

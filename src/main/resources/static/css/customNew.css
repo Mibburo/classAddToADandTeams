@@ -115,7 +115,7 @@ body{
     margin-left: 3rem !important;
 }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 995px) {
     .row{
         width: 100% !important;
     }
@@ -127,6 +127,29 @@ body{
         width: 100% !important;
         border-right: none;
     }
+    .row .col.m10{
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        left: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    .rContainer{
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .rContainer{
+        width: 100% !important;
+    }
+
+    .row{
+        width: 100% !important;
+    }
+
     .row .col.m10{
         width: 100% !important;
         margin-left: auto !important;

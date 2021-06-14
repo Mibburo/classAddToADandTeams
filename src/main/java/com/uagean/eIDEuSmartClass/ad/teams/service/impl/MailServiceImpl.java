@@ -41,7 +41,7 @@ public class MailServiceImpl implements MailService {
             helper.setTo(recipient);
             helper.setFrom(new InternetAddress(FROM, MAIL_FRIENDLY_NAME));
             helper.setSubject("Course on e-Privacy and Cybersecurity: You can now connect to Teams (Microsoft)");
-            String content = MailContentBuilder.buildEmail();
+            String content = MailContentBuilder.buildEmail(recipient);
 
             helper.setText(content, true);
 

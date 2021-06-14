@@ -28,16 +28,18 @@ public class MailContentBuilder {
             "If you accept the invitation sent by Microsoft (on behalf of i4mLab@UAegean), you will be redirected to the Teams landing page, where you can:\n" +
             "</p>\n" +
             "<p>\n" +
-            "<ol>\n" +
+            "<ul>\n" +
             "  <li>\n" +
-            "    Authenticate with your Microsoft account which corresponds to the email address you have registered with the Course, a few minutes ago (<a href=\"https://login.microsoftonline.com/common/oauth2/v2.0/authorize?response_type=id_token&scope=openid profile&client_id=5e3ce6c0-2b1f-4285-8d4b-75ee78787346&redirect_uri=https://teams.microsoft.com/go&state=eyJpZCI6IjM3M2FjMGFhLTQ4ODctNDZlNi1iNmI2LWU1OTFjODgyYmZiYiIsInRzIjoxNjIzNDI4Mzg4LCJtZXRob2QiOiJyZWRpcmVjdEludGVyYWN0aW9uIn0=&nonce=878a44c2-675d-41e3-8a6d-4ab2fd3122cd&client_info=1&x-client-SKU=MSAL.JS&x-client-Ver=1.3.4&client-request-id=6ed2c6cf-b260-4e72-989b-df67dedffea8&response_mode=fragment\">Sign in</a>).\n" +
-            "    If you haven’t  an account with Microsoft, you can open one by following the link: <a href=\"https://signup.microsoft.com/create-account/signup?products=CFQ7TTC0K8P5:0004&culture=en-us&country=WW&lm=deeplink&lmsrc=homePageWeb&cmpid=FreemiumSignUpHero&ali=1\">New to Teams: Sign up now</a>\n" +
+            "    Authenticate with Microsoft, In the Sign in form, enter the email address you have registered with the UAegean-HP SMart Class - Email: < %1$s > \n" +
+            "  </li>\n" +
+            "  <li>\n" +
+            "   If it not accepted, you have to open a new account with Microsoft where the username should be the email address you  have registered with the UAegean-HP SMart Class - Email: < %1$s >" +
             "  </li>\n" +
             "  <li>\n" +
             "    Download the desktop and mobile app (for better use of the provided functionality) -\n" +
             "    <a href=\"https://www.microsoft.com/en-ww/microsoft-teams/download-app \">https://www.microsoft.com/en-ww/microsoft-teams/download-app</a>\n" +
             "  </li>\n" +
-            "</ol>\n" +
+            "</ul>\n" +
             "    </p>\n" +
             "\n" +
             "<p>\n" +
@@ -63,8 +65,8 @@ public class MailContentBuilder {
             + "</html>";
 
 
-    public static String buildEmail(){
-        return String.format(header + body + footer);
+    public static String buildEmail(String email){
+        return String.format(header + body + footer, email);
     }
 
 }

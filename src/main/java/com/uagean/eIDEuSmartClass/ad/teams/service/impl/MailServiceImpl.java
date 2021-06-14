@@ -25,8 +25,8 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class MailServiceImpl implements MailService {
 
-    private final static String MAIL_FRIENDLY_NAME = " onlinecourses@i4mlabUAegean.onmicrosoft.com ";
-    private final String FROM = "smartclass@i4mlabUAegean.onmicrosoft.com";
+    private final static String MAIL_FRIENDLY_NAME = "onlinecourses@i4mlabUAegean.onmicrosoft.com";
+    private final String FROM = "onlinecourses@i4mlabUAegean.onmicrosoft.com";
     private static Logger log = LoggerFactory.getLogger(MailService.class);
 
     @Autowired

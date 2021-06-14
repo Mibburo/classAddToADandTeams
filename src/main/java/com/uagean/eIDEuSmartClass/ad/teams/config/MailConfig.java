@@ -20,8 +20,7 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
-//    private final static String MAIL_HOST = "smtp.aegean.gr";
-    private final static String MAIL_HOST = "smtp.gmail.com";
+    private final static String MAIL_HOST = "smtp.office365.com";
 
     @Value("${mailPass}")
     private String pass;
@@ -32,7 +31,7 @@ public class MailConfig {
 
         mailSender.setHost(MAIL_HOST);
         mailSender.setPort(587);
-        mailSender.setUsername("eidapps@atlantis-group.gr");
+        mailSender.setUsername("onlinecourses@i4mlabUAegean.onmicrosoft.com");
         mailSender.setPassword(pass);
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
@@ -40,14 +39,5 @@ public class MailConfig {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
         return mailSender;
-    }
-
-    private Properties getMailProperties() {
-        Properties props = new Properties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
-        return props;
     }
 }

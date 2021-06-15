@@ -1,10 +1,10 @@
 {
-  "realm": "ssi_linking",
-  "auth-server-url": "https://dss1.aegean.gr/auth",
+  "realm": "SSI",
+  "auth-server-url": "https://esmo-gateway.eu/auth/",
   "ssl-required": "external",
-  "resource": "smartclass",
+  "resource": "online-courses",
   "credentials": {
-    "secret": "f7de9684-a7bb-4adc-9cfa-a71bf2b1791e"
+    "secret": "433b5f4a-b098-42c7-ae6c-5d0c5445f55d"
   },
   "confidential-port": 0
 }

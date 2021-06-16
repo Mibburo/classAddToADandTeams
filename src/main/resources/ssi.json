@@ -1,10 +1,10 @@
 {
-  "realm": "SSI",
+  "realm": "ssi-linked",
   "auth-server-url": "https://esmo-gateway.eu/auth/",
   "ssl-required": "external",
   "resource": "online-courses",
   "credentials": {
-    "secret": "433b5f4a-b098-42c7-ae6c-5d0c5445f55d"
+    "secret": "d702abf0-7012-4b92-8142-7cc40d1bf922"
   },
   "confidential-port": 0
 }

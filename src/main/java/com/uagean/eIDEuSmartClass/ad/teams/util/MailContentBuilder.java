@@ -46,7 +46,7 @@ public class MailContentBuilder {
             "After successful authentication, you may proceed with Teams from the desktop/mobile app -- or from the web interface of Teams, if you haven’t downloaded the app.\n" +
             "</p>\n" +
             "<p>\n" +
-            "<b>Important</b>: When you enter Teams, please select the domain “i4mLab@UAegean (Guest)'' at the right corner of the application.\n" +
+            "<b>Important</b>: When you enter Teams, please select the domain “i4mLab@UAegean (Guest)“ at the right corner of the application.\n" +
             "</p>\n" +
             "<p>\n" +
             "You are IN!: Select your <b>Course</b> Team\n" +
@@ -57,7 +57,7 @@ public class MailContentBuilder {
     private final static String footer
            = "<p>\n" +
             "<b>Organization:  i4mLab@UAegean (UAegean | i4m Lab)<br>\n" +
-            "  More information on how to use Microsoft Teams can be found below:</b><br>\n" +
+            "  More information on how to Sign in / Sign up to Microsoft Teams can be found below:</b><br>\n" +
             "  <a href=\"https://i4mlabuaegean.sharepoint.com/:w:/s/i4mlabprojects/EbKBPQD6tx1LnLmuPQbKt7cB-ZkJAaXsE2QZOGe1nzbQkQ?e=A4sSfJ\">MS Word document</a><br>\n" +
             "  <a href=\"https://docs.google.com/document/d/1mJRV0v06pa6tnrYPSnOU2vFV7t8sDPlE_Q_2Zlc1LWI/edit?usp=sharing\">Google Drive document</a>\n" +
             "</p>\n" +

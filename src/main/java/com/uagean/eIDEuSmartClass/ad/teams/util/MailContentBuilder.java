@@ -30,10 +30,10 @@ public class MailContentBuilder {
             "<p>\n" +
             "<ul>\n" +
             "  <li>\n" +
-            "    Authenticate with Microsoft, In the Sign in form, enter the email address you have registered with the UAegean-HP SMart Class - Email: < %1$s > \n" +
+            "    Authenticate with Microsoft, In the Sign in form, enter the email address you have registered with the UAegean e-Privacy and Cybersecurity: Technology and Policy issues class - Email: < %1$s > \n" +
             "  </li>\n" +
             "  <li>\n" +
-            "   If it not accepted, you have to open a new account with Microsoft where the username should be the email address you  have registered with the UAegean-HP SMart Class - Email: < %1$s >" +
+            "   If it not accepted, you have to open a new account with Microsoft where the username should be the email address you  have registered with the UAegean e-Privacy and Cybersecurity: Technology and Policy issues class - Email: < %1$s >" +
             "  </li>\n" +
             "  <li>\n" +
             "    Download the desktop and mobile app (for better use of the provided functionality) -\n" +

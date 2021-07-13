@@ -91,6 +91,7 @@ body{
 .mContainer{
     display: flex !important;
     flex-direction: column !important;
+    overflow: hidden !important;
     /*align-items: center !important;*/
 }
 
@@ -115,6 +116,12 @@ body{
     margin-left: 3rem !important;
 }
 
+.rightFooter{
+    margin-top: auto;
+    margin-bottom: auto;
+    width:52%;
+}
+
 @media only screen and (max-width: 995px) {
     .row{
         width: 100% !important;
@@ -122,6 +129,7 @@ body{
     .signup{
         width: 100% !important;
         height: 20rem !important;
+        margin-left: 0 !important;
     }
     .login{
         width: 100% !important;
@@ -132,6 +140,14 @@ body{
         margin-left: auto !important;
         margin-right: auto !important;
         left: 0 !important;
+    }
+
+    .rightFooter{
+        width:100%;
+    }
+
+    .rightList{
+        margin-left: 3rem !important;
     }
 }
 
@@ -180,12 +196,6 @@ h5.darkBlueFont{
 
 .uAegLogo{
     width:218px;
-}
-
-.rightFooter{
-    margin-top: auto;
-    margin-bottom: auto;
-    width:52%;
 }
 
 .result{
